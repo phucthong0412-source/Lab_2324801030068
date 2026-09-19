@@ -26,7 +26,88 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.deepPurple,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.shopping_bag,
+                    size: 50,
+                    color: Colors.white,
+                  ),
 
+                  SizedBox(height: 10),
+
+                  Text(
+                    'Fashion Shop',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Trang chủ'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(Icons.category),
+              title: const Text('Danh mục'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/category');
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(Icons.shopping_cart),
+              title: const Text('Giỏ hàng'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/cart');
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('Hồ sơ'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/profile');
+              },
+            ),
+
+            const Divider(),
+
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Đăng xuất'),
+              onTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/login',
+                      (route) => false,
+                );
+              },
+            ),
+          ],
+        ),
+      ),
       body: GridView.builder(
         padding: const EdgeInsets.all(16),
 
@@ -94,6 +175,43 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           );
+        },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        type: BottomNavigationBarType.fixed,
+
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Trang chủ',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            label: 'Danh mục',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Giỏ hàng',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Hồ sơ',
+          ),
+        ],
+
+        onTap: (index) {
+          if (index == 1) {
+            Navigator.pushNamed(context, '/category');
+          }
+
+          if (index == 2) {
+            Navigator.pushNamed(context, '/cart');
+          }
+
+          if (index == 3) {
+            Navigator.pushNamed(context, '/profile');
+          }
         },
       ),
     );
